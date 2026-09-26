@@ -21,8 +21,9 @@
   --text-muted: rgba(253, 244, 255, 0.62);
   --text-soft: rgba(253, 244, 255, 0.78);
 
-  --font-display: var(--font-display), var(--font-body), "Exo 2", "IBM Plex Sans", sans-serif;
-  --font-body: var(--font-body), "IBM Plex Sans", sans-serif;
+  --font-display-stack: var(--font-display), var(--font-body), "Exo 2", "IBM Plex Sans",
+    sans-serif;
+  --font-body-stack: var(--font-body), "IBM Plex Sans", sans-serif;
 
   --header-h: 4.25rem;
   --section-space: clamp(5rem, 12vw, 9rem);
@@ -37,8 +38,8 @@
   --color-ink: var(--black);
   --color-night: var(--dark-purple);
   --color-snow: var(--white);
-  --font-display: var(--font-display);
-  --font-sans: var(--font-body);
+  --font-display: var(--font-display-stack);
+  --font-sans: var(--font-body-stack);
 }
 
 * {
@@ -69,7 +70,7 @@ body {
   min-height: 100%;
   background: var(--black);
   color: var(--white);
-  font-family: var(--font-body);
+  font-family: var(--font-body-stack);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -110,7 +111,7 @@ textarea {
 }
 
 .font-display {
-  font-family: var(--font-display);
+  font-family: var(--font-display-stack);
 }
 
 .section-shell {
