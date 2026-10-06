@@ -196,6 +196,9 @@ const el = {
     tagline: "20 YEARS OF MUSIC",
     rights: "© 2026 Deejay Zak. All rights reserved.",
     language: "Γλώσσα",
+    explore: "Πλοήγηση",
+    contact: "Επικοινωνία",
+    madeBy: "φτιάχτηκε από την nexusdevstudio",
   },
   cursor: {
     view: "VIEW",
@@ -406,6 +409,9 @@ const en = {
     tagline: "20 YEARS OF MUSIC",
     rights: "© 2026 Deejay Zak. All rights reserved.",
     language: "Language",
+    explore: "Explore",
+    contact: "Contact",
+    madeBy: "made by nexusdevstudio",
   },
   cursor: {
     view: "VIEW",
