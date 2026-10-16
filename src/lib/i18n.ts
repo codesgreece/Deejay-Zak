@@ -15,7 +15,6 @@ export const navItems = [
   { id: "about", href: "#about" },
   { id: "music", href: "#music" },
   { id: "events", href: "#events" },
-  { id: "gallery", href: "#gallery" },
   { id: "services", href: "#services" },
   { id: "contact", href: "#contact" },
 ] as const;

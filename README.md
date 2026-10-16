@@ -28,6 +28,6 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to `/el` by de
 
 ## Content
 
-Artist data, services, support acts, gallery placeholders, events, and translations live under `src/data/`.
+Artist data, services, support acts, events, and translations live under `src/data/`.
 
 Replace placeholders (photos, tracks, events, social URLs) when real assets are available. Do not invent facts.

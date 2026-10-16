@@ -31,7 +31,6 @@ export function Navbar({ locale, dictionary }: NavbarProps) {
     about: dictionary.nav.about,
     music: dictionary.nav.music,
     events: dictionary.nav.events,
-    gallery: dictionary.nav.gallery,
     services: dictionary.nav.services,
     contact: dictionary.nav.contact,
   };

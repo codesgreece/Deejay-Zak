@@ -11,7 +11,6 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { GallerySection } from "@/components/sections/GallerySection";
 import { Hero } from "@/components/sections/Hero";
 import { MusicSection } from "@/components/sections/MusicSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
@@ -42,7 +41,6 @@ export function HomePage({ locale, dictionary }: HomePageProps) {
         <MusicSection dictionary={dictionary} />
         <ServicesSection dictionary={dictionary} />
         <EventsSection dictionary={dictionary} />
-        <GallerySection dictionary={dictionary} />
         <BookingSection dictionary={dictionary} />
         <ContactSection dictionary={dictionary} />
       </main>
