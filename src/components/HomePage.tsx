@@ -1,5 +1,6 @@
 "use client";
 
+import { MusicProvider } from "@/components/audio/MusicProvider";
 import { AmbientBackground, GrainOverlay } from "@/components/layout/AmbientBackground";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Footer } from "@/components/layout/Footer";
@@ -24,7 +25,7 @@ type HomePageProps = {
 
 export function HomePage({ locale, dictionary }: HomePageProps) {
   return (
-    <>
+    <MusicProvider dictionary={dictionary}>
       <PageLoader
         label={dictionary.loader.label}
         loadingLabel={dictionary.loader.loading}
@@ -46,6 +47,6 @@ export function HomePage({ locale, dictionary }: HomePageProps) {
       </main>
       <Footer locale={locale} dictionary={dictionary} />
       <StickyBookingBar dictionary={dictionary} />
-    </>
+    </MusicProvider>
   );
 }

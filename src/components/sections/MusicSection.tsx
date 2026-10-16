@@ -1,12 +1,12 @@
 "use client";
 
+import { useMusic } from "@/components/audio/MusicProvider";
 import { AudioVisualizer } from "@/components/ui/AudioVisualizer";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SectionHeading, ScrollReveal } from "@/components/ui/ScrollReveal";
-import { tracks } from "@/data/music";
+import { backgroundTrack, tracks } from "@/data/music";
 import type { Dictionary } from "@/data/translations";
 import { Pause, Play } from "lucide-react";
-import { useState } from "react";
 
 type MusicSectionProps = {
   dictionary: Dictionary;
@@ -14,10 +14,11 @@ type MusicSectionProps = {
 
 export function MusicSection({ dictionary }: MusicSectionProps) {
   const t = dictionary.music;
-  const [playing, setPlaying] = useState(false);
+  const { playing, muted, needsGesture, togglePlay, enableSound } = useMusic();
   const hasTracks = tracks.length > 0;
   const title = hasTracks ? tracks[0].title : t.placeholderTitle;
   const genre = hasTracks ? tracks[0].genre : t.placeholderGenre;
+  const isLive = hasTracks && playing && !muted && !needsGesture;
 
   return (
     <section id="music" className="section-pad relative">
@@ -44,13 +45,15 @@ export function MusicSection({ dictionary }: MusicSectionProps) {
                 <div className="mt-8 flex items-center gap-4">
                   <button
                     type="button"
-                    className="flex h-14 w-14 items-center justify-center rounded-full border border-magenta/50 bg-magenta/15 text-white transition hover:bg-magenta/25"
-                    aria-label={playing ? t.pause : t.play}
+                    className="flex h-14 w-14 items-center justify-center rounded-full border border-magenta/50 bg-magenta/15 text-white transition hover:bg-magenta/25 disabled:opacity-40"
+                    aria-label={
+                      needsGesture ? t.bgEnable : isLive || playing ? t.pause : t.play
+                    }
                     data-cursor="PLAY"
-                    onClick={() => setPlaying((v) => !v)}
+                    onClick={() => (needsGesture ? enableSound() : togglePlay())}
                     disabled={!hasTracks}
                   >
-                    {playing && hasTracks ? (
+                    {isLive || (playing && !needsGesture) ? (
                       <Pause className="h-5 w-5" />
                     ) : (
                       <Play className="ml-0.5 h-5 w-5" />
@@ -60,14 +63,14 @@ export function MusicSection({ dictionary }: MusicSectionProps) {
                     <div className="h-[2px] w-full overflow-hidden bg-white/10">
                       <div
                         className={`h-full bg-gradient-to-r from-magenta to-violet transition-all duration-500 ${
-                          playing && hasTracks ? "w-1/3" : "w-0"
+                          isLive || (playing && !needsGesture) ? "w-2/3" : "w-0"
                         }`}
                       />
                     </div>
                     <AudioVisualizer
                       bars={40}
                       className="mt-4 h-12 w-full max-w-xl"
-                      active={playing && hasTracks}
+                      active={isLive || (playing && !needsGesture)}
                     />
                   </div>
                 </div>
@@ -77,23 +80,16 @@ export function MusicSection({ dictionary }: MusicSectionProps) {
                 <p className="w-full font-display text-[10px] tracking-[0.28em] text-white/40 uppercase lg:mb-2">
                   {t.platforms}
                 </p>
-                {["SoundCloud", "Spotify", "Mixcloud", "YouTube"].map((platform) => (
-                  <span
-                    key={platform}
-                    className="inline-flex min-h-11 items-center rounded-full border border-white/10 px-4 text-xs tracking-[0.18em] text-white/40 uppercase"
-                    title={dictionary.social.comingSoon}
-                  >
-                    {platform}
-                  </span>
-                ))}
+                <a
+                  href={backgroundTrack.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center rounded-full border border-white/15 px-4 text-xs tracking-[0.18em] text-white/75 uppercase transition hover:border-magenta/50 hover:text-white"
+                >
+                  YouTube
+                </a>
               </div>
             </div>
-
-            {!hasTracks ? (
-              <p className="mt-8 text-xs text-white/35">
-                Player UI ready — connect MP3 / SoundCloud / Spotify / Mixcloud later.
-              </p>
-            ) : null}
           </div>
         </ScrollReveal>
 
