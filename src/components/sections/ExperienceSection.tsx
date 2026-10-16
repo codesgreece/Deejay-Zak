@@ -6,6 +6,7 @@ import { artist } from "@/data/artist";
 import type { Dictionary } from "@/data/translations";
 import { usePrefersReducedMotion } from "@/hooks/useMedia";
 import { useInView } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type ExperienceSectionProps = {
@@ -101,16 +102,15 @@ export function ExperienceSection({ dictionary }: ExperienceSectionProps) {
               </div>
             </div>
 
-            {/* Replaceable media frame */}
-            <div
-              className="mt-8 aspect-[16/9] overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-violet/20 via-transparent to-magenta/20"
-              aria-label="Media placeholder"
-            >
-              <div className="flex h-full items-end p-4">
-                <p className="font-display text-[10px] tracking-[0.3em] text-white/40">
-                  MEDIA PLACEHOLDER
-                </p>
-              </div>
+            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-xl border border-white/10">
+              <Image
+                src={artist.image}
+                alt={artist.imageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover object-[58%_center]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
           </div>
         </ScrollReveal>

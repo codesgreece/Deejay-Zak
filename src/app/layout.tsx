@@ -48,12 +48,21 @@ export const metadata: Metadata = {
     title: "Deejay Zak | Professional DJ in Crete & Greece",
     description:
       "20 years of professional experience in music, based in Crete and performing across Greece.",
+    images: [
+      {
+        url: "/artist/deejay-zak.jpg",
+        width: 1233,
+        height: 856,
+        alt: "Deejay Zak performing at the DJ booth",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Deejay Zak | Professional DJ in Crete & Greece",
     description:
       "20 years of professional experience in music, based in Crete and performing across Greece.",
+    images: ["/artist/deejay-zak.jpg"],
   },
   robots: {
     index: true,

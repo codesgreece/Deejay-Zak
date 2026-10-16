@@ -2,9 +2,11 @@
 
 import { AudioVisualizer } from "@/components/ui/AudioVisualizer";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { artist } from "@/data/artist";
 import type { Dictionary } from "@/data/translations";
 import { usePrefersReducedMotion } from "@/hooks/useMedia";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type HeroProps = {
   dictionary: Dictionary;
@@ -45,6 +47,7 @@ function SplitChars({
 
 export function Hero({ dictionary }: HeroProps) {
   const t = dictionary.hero;
+  const reduced = usePrefersReducedMotion();
 
   return (
     <section
@@ -52,28 +55,21 @@ export function Hero({ dictionary }: HeroProps) {
       className="relative flex min-h-[100svh] items-end overflow-hidden pb-16 pt-28 md:items-center md:pb-24 md:pt-32"
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[#10051A]" />
-        <div className="absolute inset-0 scale-110 bg-[radial-gradient(ellipse_at_60%_40%,rgba(236,72,153,0.22),transparent_50%),radial-gradient(ellipse_at_30%_70%,rgba(124,58,237,0.28),transparent_45%),linear-gradient(160deg,#030303_10%,#10051A_55%,#030303_100%)] [animation:hero-zoom_18s_ease-in-out_infinite_alternate]" />
-        <div className="absolute inset-0 ambient-grid opacity-30" />
-        <div className="absolute -left-10 top-24 h-72 w-72 rounded-full bg-magenta/20 blur-[110px] animate-glow-pulse" />
-        <div className="absolute bottom-10 right-0 h-80 w-80 rounded-full bg-violet/25 blur-[120px] animate-float-y" />
-
-        {/* Replaceable cinematic visual placeholder — not a photo of the artist */}
-        <div
-          className="absolute inset-y-[18%] right-[-8%] hidden w-[52%] md:block"
-          aria-hidden
-        >
-          <div className="relative h-full w-full overflow-hidden rounded-l-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] via-transparent to-magenta/10">
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_40%,rgba(236,72,153,0.18),transparent_70%)]" />
-            <div className="absolute inset-8 border border-white/10" />
-            <div className="absolute bottom-10 left-10 right-10">
-              <AudioVisualizer bars={36} className="h-16 w-full" active />
-              <p className="mt-4 font-display text-[10px] tracking-[0.35em] text-white/45">
-                VISUAL PLACEHOLDER — REPLACE WITH ARTIST MEDIA
-              </p>
-            </div>
-          </div>
-        </div>
+        <Image
+          src={artist.image}
+          alt={artist.imageAlt}
+          fill
+          priority
+          sizes="100vw"
+          className={`object-cover object-[72%_28%] sm:object-[68%_center] md:object-[62%_center] ${
+            reduced ? "" : "[animation:hero-zoom_18s_ease-in-out_infinite_alternate]"
+          }`}
+        />
+        {/* Mobile: keep face readable; desktop: darken left for copy */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/75 md:hidden" />
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-black via-black/65 to-black/15 md:block" />
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-black via-transparent to-black/45 md:block" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,rgba(236,72,153,0.1),transparent_55%)] mix-blend-soft-light" />
       </div>
 
       <div className="section-shell relative z-10 w-full">
@@ -87,7 +83,7 @@ export function Hero({ dictionary }: HeroProps) {
             {t.eyebrow}
           </motion.p>
 
-          <h1 className="font-display font-bold leading-[0.88] tracking-[-0.04em] text-white">
+          <h1 className="font-display font-bold leading-[0.88] tracking-[-0.04em] text-white drop-shadow-[0_4px_28px_rgba(0,0,0,0.55)]">
             <span className="block overflow-hidden text-[clamp(3.4rem,14vw,8.5rem)]">
               <SplitChars text={t.titleLine1} delay={0.2} />
             </span>
@@ -136,7 +132,6 @@ export function Hero({ dictionary }: HeroProps) {
           </motion.div>
         </div>
       </div>
-
     </section>
   );
 }
